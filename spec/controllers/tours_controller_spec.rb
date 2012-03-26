@@ -24,6 +24,7 @@ describe ToursController do
     @user = User.create({
       :email => 'none@test.com'
     })
+    @user.update_attribute "ip", "127.0.0.1"
     cookies[:user] = { :value => @user.id, :expires => 1.year.from_now }
   end
   # This should return the minimal set of attributes required to create a valid
@@ -50,6 +51,7 @@ describe ToursController do
   describe "GET show" do
     it "assigns the requested tour as @tour" do
       tour = Tour.create! valid_attributes
+      tour.update_attribute "user_id", @user.id
       get :show, {:id => tour.to_param}, valid_session
       assigns(:tour).should eq(tour)
     end
