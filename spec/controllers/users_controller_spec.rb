@@ -3,9 +3,9 @@ require 'spec_helper'
 describe UsersController do
 
   describe "GET 'index'" do
-    it "returns http success" do
+    it "redirects to root_path" do
       get 'index'
-      response.should be_success
+      response.should redirect_to root_path
     end
   end
 

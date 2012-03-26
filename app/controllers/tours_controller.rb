@@ -39,7 +39,7 @@ class ToursController < ApplicationController
   end
 
   def edit
-    @tour = Tour.find(params[:id])
+    redirect_to root_path, notice: "You may not edit records."
   end
 
   def create
@@ -67,7 +67,6 @@ class ToursController < ApplicationController
   end
 
   def destroy
-    @tour = Tour.find(params[:id])
-    @tour.destroy
+    redirect_to root_path, notice: "You may not delete records."
   end
 end

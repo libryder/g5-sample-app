@@ -12,5 +12,5 @@ A tour with the following information has been requested:<br /><br />
   <h3>Tour Information</h3>
   Questions: <%= @tour.additional_questions %><br />
   Tour date: <%= @tour.tour_date %><br />
-  Amenities: <%= @tour.amenities.join(', ') %><br />
+  Amenities: <%= @tour.amenities.join(', ') unless @tour.amenities.nil? %><br />
 </p>

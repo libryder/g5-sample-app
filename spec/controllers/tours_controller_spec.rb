@@ -20,6 +20,12 @@ require 'spec_helper'
 
 describe ToursController do
 
+  before(:each) do
+    @user = User.create({
+      :email => 'none@test.com'
+    })
+    cookies[:user] = { :value => @user.id, :expires => 1.year.from_now }
+  end
   # This should return the minimal set of attributes required to create a valid
   # Tour. As you add validations to Tour, be sure to
   # update the return value of this method accordingly.
@@ -35,10 +41,9 @@ describe ToursController do
   end
   
   describe "GET index" do
-    it "assigns all tours as @tours" do
-      tour = Tour.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:tours).should eq([tour])
+    it "redirects to root_path" do
+      get :index
+      response.should redirect_to(root_path)
     end
   end
 
@@ -51,17 +56,28 @@ describe ToursController do
   end
 
   describe "GET new" do    
-    it "assigns a new tour as @tour" do
+    it "assigns a new tour as @tour if user has entered additional information" do
+      @user.update_attributes({
+        :first_name => "Poopy",
+        :last_name => "Pants",
+        :phone_number => "1112223333"
+      })
       get :new, {}, valid_session
       assigns(:tour).should be_a_new(Tour)
     end
+    
+    it "directs to user edit page if additional information has not been filled out" do
+      get :new, {}, valid_session
+      response.should redirect_to(edit_user_path @user)
+    end
+    
   end
 
   describe "GET edit" do
-    it "assigns the requested tour as @tour" do
+    it "redirects to root_path" do
       tour = Tour.create! valid_attributes
       get :edit, {:id => tour.to_param}, valid_session
-      assigns(:tour).should eq(tour)
+      response.should redirect_to root_path
     end
   end
 
@@ -147,17 +163,10 @@ describe ToursController do
   end
 
   describe "DELETE destroy" do
-    it "destroys the requested tour" do
+    it "destroys always redirects to root_path" do
       tour = Tour.create! valid_attributes
-      expect {
-        delete :destroy, {:id => tour.to_param}, valid_session
-      }.to change(Tour, :count).by(-1)
-    end
-
-    it "redirects to the tours list" do
-      tour = Tour.create! valid_attributes
-      delete :destroy, {:id => tour.to_param}, valid_session
-      response.should redirect_to(tours_url)
+      delete :destroy, {:id => tour.id }
+      response.should redirect_to(root_path)
     end
   end
 

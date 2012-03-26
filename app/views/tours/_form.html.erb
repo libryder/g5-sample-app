@@ -25,10 +25,12 @@
   Additional amenities:<br />
 
   <div>
-    <% @amenities.each do |amenity| %>
-      <%= check_box_tag "tour[amenities][]", amenity, false, :id => "amenity_#{amenity}" %>
-      <%= f.label amenity, :for => "amenity_#{amenity}" %>
-      <br />
+    <% unless @amenities.nil? %>
+      <% @amenities.each do |amenity| %>
+        <%= check_box_tag "tour[amenities][]", amenity, false, :id => "amenity_#{amenity}" %>
+        <%= f.label amenity, :for => "amenity_#{amenity}" %>
+        <br />
+      <% end %>
     <% end %>
   </div>
   
