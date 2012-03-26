@@ -7,6 +7,9 @@ class ToursController < ApplicationController
 
   def show
     @tour = Tour.find(params[:id], :include => :user)
+    unless @tour.user.ip == request.remote_ip
+      redirect_to root_path, notice: "You do not have access to this record."
+    end
   end
 
   def new
@@ -68,5 +71,17 @@ class ToursController < ApplicationController
 
   def destroy
     redirect_to root_path, notice: "You may not delete records."
+  end
+  
+  def update_rating
+    tour = Tour.find(params[:id])
+    if tour.nil?
+      response = {"result" => "error"}
+    else
+      tour.update_attribute("rating", params[:rating])
+      response = {"result" => "success"}
+    end
+  
+    render :json => response
   end
 end

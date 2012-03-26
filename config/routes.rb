@@ -3,6 +3,8 @@ G5SampleApp::Application.routes.draw do
   match 'activate/:id/:activate' => 'users#activate'
   
   get "home/index"
+  match "tours/update_rating/:id" => 'tours#update_rating'
+
   resources :users
   resources :tours
 
