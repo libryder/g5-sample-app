@@ -74,14 +74,18 @@ class ToursController < ApplicationController
   end
   
   def update_rating
-    tour = Tour.find(params[:id])
-    if tour.nil?
-      response = {"result" => "error"}
+    @tour = Tour.find(params[:id])
+    if @tour.user.ip == request.remote_ip
+      if @tour.nil?
+        response = {"result" => "error"}
+      else
+        @tour.update_attribute("rating", params[:rating])
+        response = {"result" => "success"}
+      end
     else
-      tour.update_attribute("rating", params[:rating])
-      response = {"result" => "success"}
+      response = {"result" => "access denied" }
     end
-  
+    
     render :json => response
   end
 end
