@@ -22,7 +22,7 @@
 
 <p>
   <b>Amenities:</b>
-  <%= @tour.amenities.join(', ') %>
+  <%= @tour.amenities.join(', ') unless @tour.amenities.nil? %>
 </p>
 
 <% if @tour.rating.nil? %>
