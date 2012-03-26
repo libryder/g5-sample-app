@@ -13,7 +13,8 @@ If you are using Linux, you must specify a Javascript runtime in your Gemfile. F
 
 Then, to continue:  
    
-    bundle   
+    bundle
+    rake db:migrate     
     rails server thin   
 
 
