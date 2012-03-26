@@ -1,0 +1,35 @@
+<h3>Your Requested Tour</h3>
+
+<p>
+  <b>Name:</b>
+  <%= @tour.user.first_name %> <%= @tour.user.last_name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @tour.user.email %>
+</p>
+
+<p>
+  <b>Tour date:</b>
+  <%= @tour.tour_date %>
+</p>
+
+<p>
+  <b>Additional questions:</b>
+  <%= @tour.additional_questions %>
+</p>
+
+<p>
+  <b>Amenities:</b>
+  <%= @tour.amenities.join(', ') %>
+</p>
+
+<% if @tour.rating.nil? %>
+
+<% else %>
+<p>
+  <b>Rating:</b>
+  <%= @tour.rating %>
+</p>
+<% end %>

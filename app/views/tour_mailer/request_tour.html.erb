@@ -1,0 +1,15 @@
+A tour with the following information has been requested:<br /><br />
+
+<p>
+  <h3>Requestors Information</h3>
+  Name: <%= @tour.user.first_name %> <%= @tour.user.last_name %><br />
+  Email: <%= @tour.user.email %><br />
+  IP Address: <%= @tour.user.ip %><br />
+</p>
+
+<p>
+  <h3>Tour Information</h3>
+  Questions: <%= @tour.additional_questions %><br />
+  Tour date: <%= @tour.tour_date %><br />
+  Amenities: <%= @tour.amenities.join(', ') %><br />
+</p>

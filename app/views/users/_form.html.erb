@@ -1,0 +1,44 @@
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@user.errors.count, "error") %> prevented you from continuing:</h2>
+
+      <ul>
+      <% @user.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <% if @user.first_name.nil? %>
+      <%= f.text_field :email %>
+    <% else %>
+      <%= @user.email %>
+    <% end %>
+  </div>
+
+  <% unless @user.email.blank? or @user.pending_activation %>
+  <div class="field">
+    <%= f.label :first_name %><br />
+    <%= f.text_field :first_name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :last_name %><br />
+    <%= f.text_field :last_name %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :phone_number %><br />
+    <%= f.text_field :phone_number %>
+  </div>
+  
+  <% end %>
+  
+  <div class="actions">
+    <%= f.submit "Submit" %>
+  </div>
+<% end %>

@@ -1,0 +1,29 @@
+<h1>Listing tours</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Tour date</th>
+    <th>Additional questions</th>
+    <th>Rating</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @tours.each do |tour| %>
+  <tr>
+    <td><%= tour.user_id %></td>
+    <td><%= tour.tour_date %></td>
+    <td><%= tour.additional_questions %></td>
+    <td><%= tour.rating %></td>
+    <td><%= link_to 'Show', tour %></td>
+    <td><%= link_to 'Edit', edit_tour_path(tour) %></td>
+    <td><%= link_to 'Destroy', tour, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Tour', new_tour_path %>
